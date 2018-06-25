@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  connection: local 
+  tasks:
+  - name: install epel-repo
+    yum: name=epel-release state=present 
+  - name: add repo
+    template: 
+      src: ./sensu.repo.j2
+      dest: /etc/yum.repos.d/sensu.repo
+  - name: install redis
+    yum: name=redis state=present
+  - name: enable auto start redis
+    systemd: name=redis enabled=yes
+  - name: restart redis
+    service : name=redis state=started
+  - name: install sensu
+    yum: name=sensu state=present
+  - name: install uchiwa
+    yum: name=uchiwa state=present
+  - name: cofigure sensu
+    template: src=./config.json.j2 dest=/etc/sensu/config.json
+  - name: configure client
+    template: src=client.json.j2 dest=/etc/sensu/conf.d/client.json
+  - name: configure uchiwa
+    template: src=uchiwa.json.j2 dest=/etc/sensu/uchiwa.json
+

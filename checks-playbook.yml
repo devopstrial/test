@@ -1,0 +1,28 @@
+--- 
+- hosts: local
+  connection: local
+  tasks:
+  - name: get cpu metrics
+    sensu_check:
+      name: cpu_load
+      command: /etc/sensu/plugins/system/cpu-mpstat-metrics.rb
+      metric: yes
+      handlers: relay
+      subscribers: common
+      interval: 60
+  - name: get cpu metrics
+    sensu_check:
+      name: cpu_load
+      command: /etc/sensu/plugins/system/cpu-mpstat-metrics.rb
+      metric: yes
+      handlers: relay
+      subscribers: common
+      interval: 60
+  - name: get cpu metrics
+    sensu_check:
+      name: cpu_load
+      command: /etc/sensu/plugins/system/cpu-mpstat-metrics.rb
+      metric: yes
+      handlers: relay
+      subscribers: common
+      interval: 60
